@@ -65,6 +65,15 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()  
+              .AllowAnyMethod()   // GET, POST, PUT, DELETE
+              .AllowAnyHeader();  // headers like Content-Type, Authorization
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
